@@ -1,7 +1,8 @@
 const pg = require('pg');
 
 let connection;
-exports.connect = function (connectionString) {
+exports.connect = function () {
+  var connectionString = "postgres://sflvyrwx:Qc3EntIN6U4MrO8li6zM_QcD-LPIJ3nH@fanny.db.elephantsql.com/sflvyrwx"
   if (connection) {
     const oldConnection = connection;
     connection = null;

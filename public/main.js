@@ -20,24 +20,26 @@ const axios = window.axios;
 //   });
 // }
 
-function connectToDatabase(connectionString, isReset) {
-  return fetch(`/connect?reset=${isReset}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      connectionString,
-    }),
-  }).then(function (response) {
-    if (response.status === 200) {
-      return;
-    }
-    return response.json().then(function (response) {
-      throw new Error(response.error);
-    });
-  });
-}
+
+
+// function connectToDatabase() {
+//   return fetch(`/connect`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({
+//       connectionString,
+//     }),
+//   }).then(function (response) {
+//     if (response.status === 200) {
+//       return;
+//     }
+//     return response.json().then(function (response) {
+//       throw new Error(response.error);
+//     });
+//   });
+// }
 
 // Get product
 function getProducts() {
@@ -153,13 +155,11 @@ window.addEventListener('DOMContentLoaded', function () {
   // });
 
   connectButton.addEventListener('click', function () {
-    if (!connectionStringInput.reportValidity()) {
-      return;
-    }
-    const connectionString = connectionStringInput.value;
-    const isReset = resetCheckbox.checked;
+    // if (!connectionStringInput.reportValidity()) {
+    //   return;
+    // }
     connectButton.disabled = true;
-    connectToDatabase(connectionString, isReset)
+    refreshAttendanceTable()
       .then(function () {
         alert('Successfully connected to Database!');
       })

@@ -4,6 +4,8 @@ const createHttpErrors = require('http-errors');
 const ApiRouter = require('./routers/api');
 const database = require('./database/database');
 
+database.connect();
+
 // The web server
 const app = express();
 
@@ -23,7 +25,6 @@ app.use(function (req, res, next) {
 // Connect (Unique to this exercise)
 app.post('/connect', function (req, res, next) {
   // query parameters are all strings
-  const reset = req.query.reset === 'true';
   const connectionString = req.body.connectionString;
   database.connect(connectionString).then(function () {
     return database.query(
